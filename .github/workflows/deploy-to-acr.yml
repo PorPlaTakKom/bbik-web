@@ -21,8 +21,12 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Log in to ACR
-        run: echo ${{ secrets.AZURE_CREDENTIALS }} | docker login ${{ secrets.REGISTRY_URL }} -u ${{ secrets.CLIENT_ID }} --password-stdin
+      - name: Docker Login
+        uses: azure/docker-login@v2.0
+        with:
+          login-server: ${{ secrets.REGISTRY_URL }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6.5.0
@@ -30,4 +34,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.REGISTRY_URL }}/${{ secrets.IMAGE_NAME }}:latest
+          tags: ${{ secrets.IMAGE_NAME }}:latest
