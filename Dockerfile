@@ -5,6 +5,7 @@ ARG VITE_API
 ENV VITE_API=$VITE_API
 RUN npm install
 COPY . .
+RUN ls -l
 RUN npm run build
 
 FROM nginx:stable-alpine as production-stage
