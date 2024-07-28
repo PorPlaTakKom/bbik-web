@@ -32,3 +32,5 @@ jobs:
           file: Dockerfile
           push: true
           tags:  ${{ secrets.REGISTRY_URL }}/${{ secrets.IMAGE_NAME }}:latest
+          build-args: |
+            VITE_API: ${{ secrets.VITE_API }}
