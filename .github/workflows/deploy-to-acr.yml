@@ -22,7 +22,7 @@ jobs:
           login-server: ${{ secrets.REGISTRY_URL }}
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
-          
+
       - name: Create .env file
         run: |
           echo "VITE_API=${{ secrets.VITE_API }}" > .env
@@ -33,5 +33,3 @@ jobs:
           file: Dockerfile
           push: true
           tags:  ${{ secrets.REGISTRY_URL }}/${{ secrets.IMAGE_NAME }}:latest
-          build-args: |
-            VITE_API: ${{ secrets.VITE_API }}
